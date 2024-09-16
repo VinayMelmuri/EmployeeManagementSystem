@@ -1,0 +1,30 @@
+<div class="d-flex flex-column h-100">
+    <div class="flex-shrink-0">
+        <mat-toolbar color="primary" class="top-toolbar">
+          <button mat-icon-button class="menu-button" (click)="sidenav.toggle()" *ngIf="isScreenSmall" style="padding-right:5px ;">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span>My App</span>
+        </mat-toolbar>    
+    </div>
+
+      <div class="overflow-hidden">
+        <mat-sidenav-container class="sidenav-container">
+            <mat-sidenav #sidenav [mode]="isScreenSmall ? 'over' : 'side'" [opened]="!isScreenSmall" class="sidenav">
+                <mat-nav-list>
+                    <a mat-list-item (click)="toggleSidenav()" [routerLink]="['/empcmp/empadd']" routerLinkActive="active">Add Employee</a>
+                    <a mat-list-item (click)="toggleSidenav()" [routerLink]="['/empcmp/empdetails']" routerLinkActive="active">Employee Details</a>
+                    <a mat-list-item (click)="toggleSidenav()" [routerLink]="['/empcmp/empupdate']" routerLinkActive="active">Update</a>
+                    <a mat-list-item (click)="toggleSidenav()" [routerLink]="['/empcmp/emplist']" routerLinkActive="active">list</a>
+                </mat-nav-list>
+            </mat-sidenav>
+        
+            <mat-sidenav-content class="content flex-grow-1">
+                <div class="content-container">
+                    <router-outlet>
+                    </router-outlet>
+                </div>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+      </div>  
+</div>

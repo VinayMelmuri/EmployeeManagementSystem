@@ -1,0 +1,62 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="container mt-5" >
+  <mat-card class="p-4 card-container" >
+    <mat-card-title style="align-self: center;">Enter Employee Details</mat-card-title>
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="mt-3">
+      
+      <div fxLayout="column " fxLayoutAlign="center center" fxFlexFill>
+        <div class="input-container">
+          <mat-form-field appearance="outline" class="input-full-width">
+            <mat-label>Employee Name</mat-label>
+            <input matInput formControlName="employeeName" placeholder="Enter employee name">
+          </mat-form-field>
+        </div>
+
+        <div  class="input-container">
+          <mat-form-field appearance="outline" class="input-full-width">
+            <mat-label>Contact</mat-label>
+            <input matInput formControlName="phNumber" placeholder="Enter phone number">
+          </mat-form-field>
+        </div>
+
+        <div  class="input-container">
+          <mat-form-field appearance="outline" class="input-full-width">
+            <mat-label>place</mat-label>
+            <input matInput formControlName="city" placeholder="Enter city">
+          </mat-form-field>
+        </div>  
+      
+      </div>
+
+      <div fxLayoutAlign="center">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!employeeForm.valid">
+          Add Employee
+        </button>
+      </div>
+
+    </form>
+  </mat-card>
+</div>
+
+<!-- 
+<br>
+<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="50px">
+  <div fxFlex="70" style="background-color: lightblue; text-align: center;">Box 1</div>
+  <div fxFlex="30" style="background-color: lightcoral; text-align: center;">Box 2</div>
+</div> -->
+<!-- 
+<br><br>
+<div fxLayout="column" fxLayoutAlign="end center" fxLayoutGap="10px" style=" height: 300px;">
+  <div fxFlex="20" style="background-color: lightblue; text-align: center;">Box 1</div>
+  <div fxFlex="20" style="background-color: lightcoral; text-align: center;">Box 2</div>
+  <div fxFlex="20" style="background-color: lightgreen; text-align: center;">Box 3</div>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="" fxLayoutAlign="space-around center" class="container">
+  <div fxFlex="50" class="item">Item 1</div>
+  <div fxFlex="50" class="item">Item 2</div>
+  <div fxFlex="25" class="item">Item 3</div>
+  <div fxFlex="25" class="item">Item 4</div>
+  <div fxFlex="25" class="item">Item 5</div>
+  <div fxFlex="25" class="item">Item 6</div>
+  <div fxFlex="25" class="item">Item 7</div>
+  <div fxFlex="25" class="item">Item 8</div>
+</div> -->
