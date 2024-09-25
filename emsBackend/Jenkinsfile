@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/VinayMelmuri/EmployeeManagementSystem.git'
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh './mvnw clean install'
+            }
+        }
+
+        stage('Liquibase Update') {
+            steps {
+                sh './mvnw liquibase:update'
+            }
+        }
+
+        stage('Push Changes to GitHub') {
+            steps {
+                script {
+                    def user = "VinayMelmuri"
+                    def email = "vinaymelmuri@gmail.com"
+                    
+                    sh """
+                    git config --global user.name '${user}'
+                    git config --global user.email '${email}'
+                    git add .
+                    git commit -m "Automated update from Jenkins pipeline"
+                    git push https://github.com/VinayMelmuri/EmployeeManagementSystem.git
+                    """
+                }
+            }
+        }
+    }
+}
