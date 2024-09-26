@@ -10,13 +10,13 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh './mvnw clean install'
+                bat './mvnw clean install'
             }
         }
 
         stage('Liquibase Update') {
             steps {
-                sh './mvnw liquibase:update'
+                bat './mvnw liquibase:update'
             }
         }
 
@@ -26,7 +26,7 @@ pipeline {
                     def user = "VinayMelmuri"
                     def email = "vinaymelmuri@gmail.com"
                     
-                    sh """
+                    bat """
                     git config --global user.name '${user}'
                     git config --global user.email '${email}'
                     git add .
