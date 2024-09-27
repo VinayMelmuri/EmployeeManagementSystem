@@ -1,62 +1,53 @@
 pipeline {
     agent any
-    
-    environment {
-        // You can define environment variables here, like database credentials
-        DB_URL = 'jdbc:mysql://localhost:3306/your_database'
-        DB_USERNAME = 'ems'
-        DB_PASSWORD = 'Betelnut@999'
-    }
-    
+
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',credentialsId: 'VinayMelmuri', url: 'https://github.com/VinayMelmuri/EmployeeManagementSystem.git'
+                // Checkout the code from Git
+                git branch: 'main', url: 'https://github.com/VinayMelmuri/EmployeeManagementSystem.git'
             }
         }
-        
+
         stage('Build') {
             steps {
-				sh './mvnw clean install'
+                // Clean and build the application using Maven
+                bat 'mvn clean install'
             }
         }
 
         stage('Liquibase Update') {
             steps {
-                sh './mvnw liquibase:update'
+                // Run Liquibase to apply database migrations
+                bat 'mvn liquibase:update'
             }
         }
 
-        stage('Push Changes to GitHub') {
+        stage('Run Tests') {
             steps {
-                script {
-                    def user = "VinayMelmuri"
-                    def email = "vinaymelmuri@gmail.com"
-                    
-                    sh """
-                    git config --global user.name '${user}'
-                    git config --global user.email '${email}'
-                    git add .
-                    git commit -m "Automated update from Jenkins pipeline"
-                    git push https://github.com/VinayMelmuri/EmployeeManagementSystem.git
-                    """
-                }
+                // Execute tests if applicable
+                bat 'mvn test'
             }
         }
-    }
-     post {
-        always {
-            // Clean up workspace after job execution
-            cleanWs()
+
+        stage('Package') {
+            steps {
+                // Package the application if necessary (e.g., create a JAR or WAR file)
+                bat 'mvn package'
+            }
         }
+
+
+    }
+
+    post {
         success {
-            // Notify success (optional: Slack, email, etc.)
-            echo 'Build and deployment successful!'
+            // Actions to perform if the pipeline succeeds
+            echo 'Pipeline completed successfully!'
         }
         failure {
-            // Notify failure (optional: Slack, email, etc.)
-            echo 'Build failed!'
+            // Actions to perform if the pipeline fails
+            echo 'Pipeline failed. Please check the logs.'
         }
     }
-    
 }
