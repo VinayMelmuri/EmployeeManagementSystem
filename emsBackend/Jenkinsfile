@@ -1,6 +1,13 @@
 pipeline {
     agent any
     
+    environment {
+        // You can define environment variables here, like database credentials
+        DB_URL = 'jdbc:mysql://localhost:3306/your_database'
+        DB_USERNAME = 'ems'
+        DB_PASSWORD = 'Betelnut@999'
+    }
+    
     stages {
         stage('Checkout') {
             steps {
@@ -10,13 +17,13 @@ pipeline {
         
         stage('Build') {
             steps {
-				bat 'mvnw.cmd clean install'
+				sh './mvnw clean install'
             }
         }
 
         stage('Liquibase Update') {
             steps {
-                bat 'mvnw.cmd liquibase:update'
+                sh './mvnw liquibase:update'
             }
         }
 
@@ -26,7 +33,7 @@ pipeline {
                     def user = "VinayMelmuri"
                     def email = "vinaymelmuri@gmail.com"
                     
-                    bat """
+                    sh """
                     git config --global user.name '${user}'
                     git config --global user.email '${email}'
                     git add .
@@ -37,4 +44,19 @@ pipeline {
             }
         }
     }
+     post {
+        always {
+            // Clean up workspace after job execution
+            cleanWs()
+        }
+        success {
+            // Notify success (optional: Slack, email, etc.)
+            echo 'Build and deployment successful!'
+        }
+        failure {
+            // Notify failure (optional: Slack, email, etc.)
+            echo 'Build failed!'
+        }
+    }
+    
 }
