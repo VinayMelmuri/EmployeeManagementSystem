@@ -1,5 +1,12 @@
 pipeline {
     agent any
+    
+    environment {
+        // You can define environment variables here, like database credentials
+        DB_URL = 'jdbc:mysql://localhost:3306/your_database'
+        DB_USERNAME = 'ems'
+        DB_PASSWORD = 'Betelnut@999'
+    }
 
     stages {
         stage('Checkout') {
@@ -23,12 +30,6 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                // Execute tests if applicable
-                bat 'mvn test'
-            }
-        }
 
         stage('Package') {
             steps {
@@ -36,11 +37,36 @@ pipeline {
                 bat 'mvn package'
             }
         }
+        
+        
+
+        stage('Push Changes to GitHub') {
+            steps {
+                script {
+                    def user = "VinayMelmuri"
+                    def email = "vinaymelmuri@gmail.com"
+                    
+                    bat """
+                    git config --global user.name '${user}'
+                    git config --global user.email '${email}'
+                    git add .
+                    git commit -m "Automated update from Jenkins pipeline"
+                    git push https://github.com/VinayMelmuri/EmployeeManagementSystem.git
+                    """
+                }
+            }
+        }      
 
 
     }
 
     post {
+    
+    	always {
+            // Clean up workspace after job execution
+            cleanWs()
+            
+        }
         success {
             // Actions to perform if the pipeline succeeds
             echo 'Pipeline completed successfully!'
