@@ -4,19 +4,19 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/VinayMelmuri/EmployeeManagementSystem.git'
+                git branch: 'main',credentialsId: 'VinayMelmuri', url: 'https://github.com/VinayMelmuri/EmployeeManagementSystem.git'
             }
         }
         
         stage('Build') {
             steps {
-					bat 'mvnw.cmd clean install'
+				bat './mvnw.cmd clean install'
             }
         }
 
         stage('Liquibase Update') {
             steps {
-                bat './mvnw liquibase:update'
+                bat './mvnw.cmd liquibase:update'
             }
         }
 
