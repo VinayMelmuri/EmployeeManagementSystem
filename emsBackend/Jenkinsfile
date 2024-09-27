@@ -10,13 +10,13 @@ pipeline {
         
         stage('Build') {
             steps {
-				bat './mvnw.cmd clean install'
+				bat 'mvnw.cmd clean install'
             }
         }
 
         stage('Liquibase Update') {
             steps {
-                bat './mvnw.cmd liquibase:update'
+                bat 'mvnw.cmd liquibase:update'
             }
         }
 
