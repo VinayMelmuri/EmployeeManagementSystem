@@ -19,14 +19,18 @@ pipeline {
         stage('Build') {
             steps {
                 // Clean and build the application using Maven
-                bat 'mvn clean install'
+                dir('backend') { // Change to the directory where pom.xml is located
+                    bat 'mvn clean install'
+                }
             }
         }
 
         stage('Liquibase Update') {
             steps {
                 // Run Liquibase to apply database migrations
-                bat 'mvn liquibase:update'
+                 dir('backend') {  // If liquibase commands are also in the backend
+                    bat 'mvn liquibase:update'
+                }
             }
         }
 
@@ -34,7 +38,9 @@ pipeline {
         stage('Package') {
             steps {
                 // Package the application if necessary (e.g., create a JAR or WAR file)
-                bat 'mvn package'
+                dir('backend'){
+                   bat 'mvn package' 
+                }
             }
         }
         
@@ -51,12 +57,11 @@ pipeline {
                     git config --global user.email '${email}'
                     git add .
                     git commit -m "Automated update from Jenkins pipeline"
-                    git push https://github.com/VinayMelmuri/EmployeeManagementSystem.git
+                    git push origin main
                     """
                 }
             }
         }      
-
 
     }
 
