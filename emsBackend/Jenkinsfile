@@ -1,6 +1,10 @@
 pipeline {
     agent any
     
+     tools {
+        jdk 'JDK 17' // Change this to match your configured JDK name
+    }
+    
     environment {
         // You can define environment variables here, like database credentials
         DB_URL = 'jdbc:mysql://localhost:3306/your_database'
