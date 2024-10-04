@@ -81,6 +81,20 @@
                 <target>${maven.compiler.source}</target>
             </configuration>
         </plugin>
+        
+        <plugin>
+		    <groupId>org.liquibase</groupId>
+		    <artifactId>liquibase-maven-plugin</artifactId>
+		    <version>4.27.0</version>
+		    <configuration>
+		        <changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</changeLogFile>
+		        <url>jdbc:mysql://localhost:3306/your_database</url>
+		        <username>root</username>
+		        <password>Betelnut@999</password>
+		        <driver>com.mysql.cj.jdbc.Driver</driver> <!-- Ensure the correct JDBC driver is specified -->
+		    </configuration>
+		</plugin>
+
 		</plugins>
 		
 	</build>
