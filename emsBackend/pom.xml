@@ -80,7 +80,7 @@
                 <source>${maven.compiler.source}</source>
                 <target>${maven.compiler.source}</target>
                 
-                <changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</changeLogFile>
+                <changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</changeLogFile>
     			<searchPath>src/main/resources/db/changelog</searchPath>
                 
             </configuration>
