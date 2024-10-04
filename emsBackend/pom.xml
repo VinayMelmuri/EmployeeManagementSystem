@@ -79,6 +79,10 @@
             <configuration>
                 <source>${maven.compiler.source}</source>
                 <target>${maven.compiler.source}</target>
+                
+                <changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</changeLogFile>
+    			<searchPath>src/main/resources/db/changelog</searchPath>
+                
             </configuration>
         </plugin>
         
