@@ -88,7 +88,7 @@
 		    <version>4.27.0</version>
 		    <configuration>
 		        <changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</changeLogFile>
-		        <url>jdbc:mysql://localhost:3306/your_database</url>
+		        <url>jdbc:mysql://localhost:3306/ems</url>
 		        <username>root</username>
 		        <password>Betelnut@999</password>
 		        <driver>com.mysql.cj.jdbc.Driver</driver> <!-- Ensure the correct JDBC driver is specified -->
