@@ -5,8 +5,20 @@ public class EmployeeDto {
 	private String employeeName;
 	private String contact;
 	private String place;
+	private Integer id;
 	
 	
+	
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 	public String getEmployeeName() {
 		return employeeName;
 	}
@@ -37,17 +49,17 @@ public class EmployeeDto {
 	}
 
 
-	public EmployeeDto(String employeeName, String contact, String place) {
-		super();
-		this.employeeName = employeeName;
-		this.contact = contact;
-		this.place = place;
-	}
-	
-	@Override
-	public String toString() {
-		return "Employee [ EmployeeName" + employeeName + ", Contact" + contact + ", place " + place + "]";
-		
-	}
+//	public EmployeeDto(String employeeName, String contact, String place) {
+//		super();
+//		this.employeeName = employeeName;
+//		this.contact = contact;
+//		this.place = place;
+//	}
+//	
+//	@Override
+//	public String toString() {
+//		return "Employee [ EmployeeName" + employeeName + ", Contact" + contact + ", place " + place + "]";
+//		
+//	}
 	
 }

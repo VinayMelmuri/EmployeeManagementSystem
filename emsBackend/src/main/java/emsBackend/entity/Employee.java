@@ -11,10 +11,10 @@ public class Employee {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "empId")
-	String employeeId;
+	@Column(name = "employee_id")
+	Integer employeeId;
 	
-	@Column(name = "empName")
+	@Column(name = "employee_name")
 	String employeeName;
 	
 	@Column(name = "contact")
@@ -24,7 +24,7 @@ public class Employee {
 	String place;
 	
 	
-	public String getEmployeeId() {
+	public int getEmployeeId() {
 		return employeeId;
 	}
 
