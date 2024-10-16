@@ -10,4 +10,5 @@ public interface EmployeeService {
 	public List<EmployeeDto> getAllEmployee() throws EmployeeException ;
 	public EmployeeDto getEmployee(String name) throws EmployeeException ; 
 	public void deleteEmployee(Integer id) throws EmployeeException ;
+	public void updateEmployee(Integer id,EmployeeDto employeeDto) throws EmployeeException;
 }

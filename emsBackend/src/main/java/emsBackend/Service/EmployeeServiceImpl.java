@@ -81,4 +81,31 @@ public class EmployeeServiceImpl implements EmployeeService {
 			throw new EmployeeException("error deleting employee with id"+id);
 		}
 	}
+
+	@Override
+	public void updateEmployee(Integer id, EmployeeDto employeeDto) {
+		try {
+			
+			Employee employee = employeeRepository.findById(id).orElse(null);
+			
+			if(employee == null) {
+				throw new EmployeeException("Employee not found with ID:" + id);
+			}
+			System.out.println("EmployeeDto received: " + employeeDto);
+
+			if(employeeDto.getContact() != null)
+				employee.setContact(employeeDto.getContact());
+				
+			if(employeeDto.getEmployeeName() != null)
+				employee.setEmployeeName(employeeDto.getEmployeeName());
+				
+			if(employeeDto.getPlace() != null)
+				employee.setPlace(employeeDto.getPlace());
+			
+			employeeRepository.save(employee);
+		}
+		catch(DataIntegrityViolationException e) {
+			throw new EmployeeException("error updating employee with id" + id);
+		}
+	}
 }
