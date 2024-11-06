@@ -11,26 +11,27 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import {MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
+// import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmpUpdateComponent,
-    EmpDetailsComponent,
-    EmpListComponent,
+    // EmpUpdateComponent,
+    // EmpDetailsComponent,
+    // EmpListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatSidenavModule,MatIconModule,MatListModule,MatFormFieldModule,MatCardModule,
     MatToolbarModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [
     provideAnimationsAsync()

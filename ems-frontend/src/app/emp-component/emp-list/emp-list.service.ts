@@ -5,13 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class EmpAddService {
-
-  private apiUrl = 'http://localhost:8765/employeeDet/employee'; 
+export class EmpListService {
+  private apiUrl = 'http://localhost:8765/employeeDet/';
 
   constructor(private http:HttpClient) { }
 
-  post(employeeData: any):Observable<any>{
-    return this.http.post(this.apiUrl, employeeData,{ responseType: 'text' });
+  getEmployees():Observable<any[]>{
+    return this.http.get<any[]>(this.apiUrl);
   }
 }

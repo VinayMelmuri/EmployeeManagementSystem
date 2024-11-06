@@ -1,1 +1,39 @@
-<p>emp-details works!</p>
+<div fxLayout = "column" fxLayoutAlign = "center center">
+  <mat-card class="p-4 card-container" >
+    <mat-card-title style="align-self: center;">Employee Details</mat-card-title>
+    <form [formGroup]="employeeForm" (ngSubmit)="findEmployee()" class="mt-3">
+      <div fxLayout="column " fxLayoutAlign="center center" fxFlexFill>
+        <div class="input-container">
+          <mat-form-field appearance="outline" class="input-full-width">
+            <mat-label>Enter EmployeeId </mat-label>
+            <input matInput formControlName="employeeId"  type="number" placeholder="ID" />
+          </mat-form-field>
+        </div>
+      </div>
+          
+      <div fxLayoutAlign="center">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!employeeForm.valid">
+          Get Employee
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+
+<mat-card *ngIf="selectedEmployee" class="employee-details">
+  <mat-card-header>
+    <mat-card-title>Employee Details</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>ID:</strong> {{ selectedEmployee.id }}</p>
+    <p><strong>Name:</strong> {{ selectedEmployee.employeeName }}</p>
+    <p><strong>Place:</strong>{{selectedEmployee.place}}</p>
+    <p><strong>Contact</strong>{{selectedEmployee.contact}}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="errorMessage" class="no-employee">
+  <mat-card-content>
+    <p>{{ errorMessage }}</p>
+  </mat-card-content>
+</mat-card>

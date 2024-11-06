@@ -1,0 +1,21 @@
+.container {
+    width: 100%;
+  }
+  
+  .card-container {
+    width: 90%; /* Card width as 90% of the viewport */
+    max-width: 800px; /* Maximum width for large screens */
+    height: auto;
+    border: none;
+    box-shadow: none;
+  }
+  
+  .input-container {
+    align-self: center;
+    width: 50%; /* Ensure the container for the input takes full width */
+    height: 100%;
+  }
+  
+  .input-full-width {
+    width: 100%; /* Ensure the input field takes full width inside the container */
+  }

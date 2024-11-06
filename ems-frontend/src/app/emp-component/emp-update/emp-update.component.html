@@ -1,1 +1,55 @@
-<p>emp-update works!</p>
+<div fxLayout="column" fxLayoutAlign="center center">
+    <mat-card class="p-4 card-container">
+      <mat-card-title style="align-self: center;">Update Employee</mat-card-title>
+      <form [formGroup]="employeeForm" (ngSubmit)="updateEmployee()" class="mt-3 input-container">
+      
+        <!-- <div fxLayout="column " fxLayoutAlign="center center" fxFlexFill> -->
+          <!-- <div class="input-container"> -->
+            <mat-form-field appearance="outline" class="input-full-width ">
+              <mat-label>Employee ID</mat-label>
+              <input matInput formControlName="id" type="number" placeholder="ID" />
+            </mat-form-field>
+          <!-- </div> -->
+    
+          <!-- <div class="input-container"> -->
+            <mat-form-field appearance="outline" class="input-full-width">
+              <mat-label>Employee Name</mat-label>
+              <input matInput formControlName="employeeName" type="text" placeholder="Name" />
+            </mat-form-field>
+          <!-- </div> -->
+    
+          <!-- <div class="input-container"> -->
+            <mat-form-field appearance="outline" class="input-full-width">
+              <mat-label>Contact</mat-label>
+              <input matInput formControlName="contact" type="text" placeholder="Contact Number" />
+            </mat-form-field>
+          <!-- </div> -->
+          
+          <!-- <div class="input-container"> -->
+            <mat-form-field appearance="outline" class="input-full-width">
+              <mat-label>Place</mat-label>
+              <input matInput formControlName="place" type="text" placeholder="Place" />
+            </mat-form-field>
+          <!-- </div> -->
+        <!-- </div> -->
+  
+        <div fxLayoutAlign="center">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!employeeForm.valid">
+            Update Employee
+          </button>
+        </div>
+        
+      </form>
+    </mat-card>
+
+    <mat-card *ngIf="updatedEmployee" class="card-container" style="align-items: center;">
+      <mat-card-title>Updated Employee</mat-card-title>
+      <mat-card-content>
+        <p>Id:{{updatedEmployee.id}}</p>
+        <p>Name:{{updatedEmployee.employeeName}}</p>
+        <p>Contact:{{updatedEmployee.contact}}</p>
+        <p>Place:{{updatedEmployee.place}}</p>
+  
+      </mat-card-content>
+    </mat-card>
+</div>  

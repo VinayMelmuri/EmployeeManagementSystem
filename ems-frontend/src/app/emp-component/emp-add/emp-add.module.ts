@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select'; // Import MatSelectM
 import { HttpClientModule } from '@angular/common/http';
 import { EmpAddComponent } from './emp-add.component'; // Import your component
 import { EmpAddService } from './emp-add.service';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     EmpAddComponent,
@@ -25,7 +25,8 @@ import { EmpAddService } from './emp-add.service';
     MatCardModule, // Use MatCardModule instead of MatCard
     MatInputModule, // Add MatInputModule for input fields
     MatButtonModule, // Add MatButtonModule for buttons
-    MatSelectModule 
+    MatSelectModule ,
+    MatSnackBarModule
   ]
 })
 export class EmpAddModule { }

@@ -1,0 +1,35 @@
+.employee-details{
+    width: 80%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 15px;
+  }
+  
+  .mat-label {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  @media (max-width: 600px) {
+    
+  }
+
+  .card-container{
+    width: 60%; 
+    max-width: 800px; 
+    height: auto;
+    border: none;
+    box-shadow: none;
+  }
+
+  .input-container{
+    width: 50%;
+  }
+
+  .input-full-width{
+    width: 100%;
+  }
