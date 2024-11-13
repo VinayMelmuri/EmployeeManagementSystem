@@ -2,6 +2,7 @@ package emsBackend.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -64,9 +65,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 	@Override
-	public EmployeeDto getEmployee(String name) throws EmployeeException {
-		// TODO Auto-generated method stub
-		return null;
+	public EmployeeDto getEmployee(Integer id) throws EmployeeException {
+		try {
+			Optional<Employee> optional = employeeRepository.findById(id);
+			Employee employee = optional.orElseThrow(()-> new EmployeeException("Employee not found with id "+id));
+			EmployeeDto employeeDto = new EmployeeDto();
+			employeeDto.setId(employee.getEmployeeId());
+			employeeDto.setContact(employee.getContact());
+			employeeDto.setEmployeeName(employee.getEmployeeName());
+			employeeDto.setPlace(employee.getPlace());
+			
+			return employeeDto;
+		}
+		catch(DataIntegrityViolationException e) {
+			throw new EmployeeException("Error fetching employee with id"+id);	
+		}
+		
 	}
 
 	@Override
@@ -83,26 +97,38 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public void updateEmployee(Integer id, EmployeeDto employeeDto) {
+	public EmployeeDto updateEmployee(Integer id, EmployeeDto employeeDto) {
 		try {
-			
 			Employee employee = employeeRepository.findById(id).orElse(null);
 			
 			if(employee == null) {
 				throw new EmployeeException("Employee not found with ID:" + id);
 			}
-			System.out.println("EmployeeDto received: " + employeeDto);
-
-			if(employeeDto.getContact() != null)
-				employee.setContact(employeeDto.getContact());
-				
-			if(employeeDto.getEmployeeName() != null)
-				employee.setEmployeeName(employeeDto.getEmployeeName());
-				
-			if(employeeDto.getPlace() != null)
-				employee.setPlace(employeeDto.getPlace());
 			
+			if( employeeDto.getContact() !=null) {
+				if( employeeDto.getContact() != ""  ) {
+					System.out.println("inside contact");
+					employee.setContact(employeeDto.getContact());
+				}
+			}
+			
+			if( employeeDto.getEmployeeName() != null ) {
+				if( employeeDto.getEmployeeName() != "" ) {
+					System.out.println("inside empname");
+					employee.setEmployeeName(employeeDto.getEmployeeName());
+				}
+			}
+				
+			if( employeeDto.getPlace() !=null ) {
+				if( employeeDto.getPlace() != "" ) {
+					System.out.println("inside place");
+					employee.setPlace(employeeDto.getPlace());
+				}
+			}
+				
 			employeeRepository.save(employee);
+			
+			return getEmployee(id);
 		}
 		catch(DataIntegrityViolationException e) {
 			throw new EmployeeException("error updating employee with id" + id);

@@ -20,6 +20,7 @@ import emsBackend.Exception.EmployeeException;
 import emsBackend.Service.EmployeeService;
 import emsBackend.Service.EmployeeServiceImpl;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/employeeDet")
 public class EmployeeApi {
@@ -40,11 +41,32 @@ public class EmployeeApi {
 		}
 	}
 	
-	@GetMapping(value = "/")
-	public ResponseEntity<List<EmployeeDto>> getAllEmployee() throws EmployeeException{
-		List<EmployeeDto> employeeDto = employeeService.getAllEmployee();
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<?> getEmployee(@PathVariable Integer id) throws EmployeeException{
+		try {
+			EmployeeDto employeeDto = new EmployeeDto();
+			employeeDto = employeeService.getEmployee(id);
+			
+			return new ResponseEntity<>(employeeDto,HttpStatus.OK);
+		}
+		catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
 		
-		return new ResponseEntity<>(employeeDto,HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/")
+	public ResponseEntity<?> getAllEmployee() throws EmployeeException{
+		try {
+			List<EmployeeDto> employeeDto = employeeService.getAllEmployee();
+			return new ResponseEntity<>(employeeDto,HttpStatus.OK);
+//			return ResponseEntity.ok(employeeDto);
+		}
+		catch(Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("An error occurred: " + e.getMessage());
+		}
+		
 	}
 
 	@DeleteMapping("/{id}")
@@ -55,10 +77,12 @@ public class EmployeeApi {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<String> updateEmployee(@RequestBody EmployeeDto employeeDto) throws EmployeeException{
+	public ResponseEntity<?> updateEmployee(@RequestBody EmployeeDto employeeDto) throws EmployeeException{
 		Integer id = employeeDto.getId();
-		employeeService.updateEmployee(id,employeeDto);
+		EmployeeDto employeeDtoreceive =new EmployeeDto();
 		
-		return new ResponseEntity<>("Employee with id"+id+"updated successfully",HttpStatus.OK);
+		employeeDtoreceive = employeeService.updateEmployee(id,employeeDto);
+		
+		return new ResponseEntity<>(employeeDtoreceive,HttpStatus.OK);
 	}
 }

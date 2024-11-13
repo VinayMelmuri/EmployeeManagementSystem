@@ -1,6 +1,5 @@
 package com.example.emsBackend;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -100,19 +99,23 @@ public class EmployeeApiTest {
 		    updateEmployeeDto.setContact(null);
 		    updateEmployeeDto.setPlace(null);
 		    
+		    EmployeeDto updatedEmployeeDto = new EmployeeDto();
+		    updatedEmployeeDto.setId(1);
+		    updatedEmployeeDto.setEmployeeName("John Updated");
+		    updatedEmployeeDto.setContact("123456789");
+		    updatedEmployeeDto.setPlace("City");
+		    
 		    Integer id = updateEmployeeDto.getId();
 		    
 		    // Mock the service to simulate a successful update (no exceptions)
-		    doNothing().when(employeeService).updateEmployee(anyInt(), any(EmployeeDto.class));
-		    
-		    
+		    when(employeeService.updateEmployee(anyInt(), any(EmployeeDto.class)))
+            .thenReturn(updatedEmployeeDto);		    
 		    	
 		    mockMvc.perform(put("/employeeDet/update")
 		            .contentType(MediaType.APPLICATION_JSON)
 		            .content(objectMapper.writeValueAsString(updateEmployeeDto)))
 		            .andExpect(status().isOk())  // Expecting 200 OK
-		            .andExpect(content().string("Employee with id" + updateEmployeeDto.getId() + "updated successfully"));
-
+		            .andExpect(content().json(objectMapper.writeValueAsString(updatedEmployeeDto)));
+	   
 	 }
-	 
 }
