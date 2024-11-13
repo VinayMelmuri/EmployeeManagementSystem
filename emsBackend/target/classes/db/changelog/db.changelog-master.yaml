@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: user
+      changes:
+        - createTable:
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: empName
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contact
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column :
+                  name: place
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
